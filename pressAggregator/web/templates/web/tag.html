@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block page_content %}
+<h1>Press Aggregator: Tagged by {{tag}}</h1>
+<main>
+  <div style="margin-bottom: 24px">
+    <a href="/">All articles</a>
+  </div>
+  <div class="grid_container">
+    {% for article in articles %}
+    <div class="card">
+      <p class="title">
+        <a class="topic" href="{{article.link}}" target="_blank">
+          {{article.title}}
+        </a>
+      </p>
+      <p>{{article.agency}}</p>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock%}
