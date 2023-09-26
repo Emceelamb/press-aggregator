@@ -15,23 +15,29 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print("Scraping rss...")
 
-        url = "https://fetchrss.com/rss/6508da2a6f4dc52d890085e26508d97829ab1e4f05782d42.xml"
+        url = "http://fetchrss.com/rss/6508da2a6f4dc52d890085e26511ef5c91c5b47177669bf3.xml"
+        # url = "https://fetchrss.com/rss/6508da2a6f4dc52d890085e26508d97829ab1e4f05782d42.xml"
 
         feed = get_feed(url)
         print(feed)
         articles = []
 
         for document in feed["articles"]:
-            link = get_url(document.links)
+            # print(document)
+            # link = get_url(document.links)
             article = {
                 "title": document["title"],
-                "link": link,
+                "link": document["link"],
                 "agency": feed["agency"],
             }
             articles.append(article)
 
         for article in articles:
-            page = requests.get(article["link"])
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+            }
+            page = requests.get(article["link"], headers=headers)
+            print(article["link"])
 
             content = scrape_page(page)
             print("\n\033[31mScraped content:\033[0m")
@@ -46,8 +52,6 @@ class Command(BaseCommand):
             pp.pprint(topics)
             article["topics"] = topics
 
-        """
-
         for a in articles:
             article = Article.objects.create(
                 title=a["title"], agency=a["agency"], link=a["link"]
@@ -59,5 +63,3 @@ class Command(BaseCommand):
             print(article.tags.all())
             # article.save()
             print("Saving article")
-
-        """
