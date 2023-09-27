@@ -12,5 +12,8 @@
 
 ## Screenshots
 
+Homepage screenshot:  
 ![Home page](docs/home.png)
+
+Topics page screenshot:  
 ![Topics page](docs/topics.png)
