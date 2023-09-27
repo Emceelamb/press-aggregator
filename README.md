@@ -9,3 +9,8 @@
 5. Apply migrations: `python manage.py migrate`
 6. Load database: `python manage.py scrape`
 7. Start server: `python manage.py runserver`
+
+## Screenshots
+
+![Home page](docs/home.png)
+![Topics page](docs/topics.png)
